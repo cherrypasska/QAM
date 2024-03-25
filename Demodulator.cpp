@@ -35,14 +35,14 @@ public:
                 real_cnt = 0.0;
             }
         }
-        for(int i = 0; i < demodulated.size(); i += modulated.size()/k){
+        for(int i = 0; i < demodulated.size()-(modulated.size()%k); i += modulated.size()/k+1){
             if(demodulated[i].imag() > max) max = demodulated[i].imag();
             if(demodulated[i].real() > max) max = demodulated[i].real();
             if(demodulated[i].imag() < min) min = demodulated[i].imag();
             if(demodulated[i].real() < min) min = demodulated[i].real();
         }
         if(min >= -1.5 && max <= 1.5){
-            for(int i = 0; i < demodulated.size(); i+= modulated.size()/k){
+            for(int i = 0; i < demodulated.size()-(modulated.size()%k); i+= modulated.size()/k+1){
                 if(demodulated[i].real() == 1.0){
                     if(demodulated[i].imag() == 1.0){
                         str_res.push_back("11");
@@ -60,14 +60,14 @@ public:
         string st;
         string st_im;
         if(min >= -4.0 && max <= 4.0){
-            for(int i = 0; i < demodulated.size(); i+= modulated.size()/k){
+            for(int i = 0; i < demodulated.size()-(modulated.size()%k); i+= modulated.size()/k+1){
                 st = func_16(demodulated[i].real());
                 st_im = func_16(demodulated[i].imag());
                 str_res.push_back(st+st_im);
             }
         }
         else{
-            for(int i = 0; i < demodulated.size(); i+= modulated.size()/k){
+            for(int i = 0; i < demodulated.size()-(modulated.size()%k); i+= modulated.size()/k+1){
                 st = func_64(demodulated[i].real());
                 st_im = func_64(demodulated[i].imag());
                 str_res.push_back(st+st_im);
